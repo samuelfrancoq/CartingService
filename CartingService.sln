@@ -3,7 +3,43 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36623.8 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartingService.Domain", "CartingService.Domain\CartingService.Domain.csproj", "{F8B29017-A363-47BC-A5E7-A6C23C7674E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartingService.DAL", "CartingService.DAL\CartingService.DAL.csproj", "{2847FF9F-7C19-408F-A0C1-6FF15BBC586F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartingService.BLL", "CartingService.BLL\CartingService.BLL.csproj", "{3BB61DFA-C3C9-4A83-BE6F-E2B656846E73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartingService.WebApi", "CartingService.WebApi\CartingService.WebApi.csproj", "{5CCFE7A2-C565-4E26-B3D7-1EE9342BD7D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartingService.UnitTests", "CartingService.UnitTests\CartingService.UnitTests.csproj", "{11D1C4ED-0A32-4B6D-8804-2469578F4DC2}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8B29017-A363-47BC-A5E7-A6C23C7674E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8B29017-A363-47BC-A5E7-A6C23C7674E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8B29017-A363-47BC-A5E7-A6C23C7674E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8B29017-A363-47BC-A5E7-A6C23C7674E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2847FF9F-7C19-408F-A0C1-6FF15BBC586F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2847FF9F-7C19-408F-A0C1-6FF15BBC586F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2847FF9F-7C19-408F-A0C1-6FF15BBC586F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2847FF9F-7C19-408F-A0C1-6FF15BBC586F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB61DFA-C3C9-4A83-BE6F-E2B656846E73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB61DFA-C3C9-4A83-BE6F-E2B656846E73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB61DFA-C3C9-4A83-BE6F-E2B656846E73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB61DFA-C3C9-4A83-BE6F-E2B656846E73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CCFE7A2-C565-4E26-B3D7-1EE9342BD7D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CCFE7A2-C565-4E26-B3D7-1EE9342BD7D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CCFE7A2-C565-4E26-B3D7-1EE9342BD7D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CCFE7A2-C565-4E26-B3D7-1EE9342BD7D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11D1C4ED-0A32-4B6D-8804-2469578F4DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11D1C4ED-0A32-4B6D-8804-2469578F4DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11D1C4ED-0A32-4B6D-8804-2469578F4DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11D1C4ED-0A32-4B6D-8804-2469578F4DC2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
