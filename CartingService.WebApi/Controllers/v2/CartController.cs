@@ -2,20 +2,22 @@
 using CartingService.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CartingService.WebApi.Controllers;
+namespace CartingService.WebApi.Controllers.v2;
 
+/// <summary>
+/// Controller for managing cart operations such as retrieving, adding, and removing items in a cart.
+/// </summary>
+[ApiVersion("2.0")]
 [ApiController]
-[Route("api/[controller]")]
-public class CartController : ControllerBase
+[Route("api/v{version:apiVersion}/[controller]")]
+public class CartController(ICartService cartService) : ControllerBase
 {
-    private readonly ICartService _cartService;
+    private readonly ICartService _cartService = cartService;
 
-    // The service is injected through the constructor
-    public CartController(ICartService cartService)
-    {
-        _cartService = cartService;
-    }
-
+    /// <summary>
+    /// Gets only the list of items in the cart.
+    /// </summary>
+    /// <param name="cartId">The unique key of the cart.</param>
     [HttpGet("{cartId}")]
     public IActionResult GetItems(string cartId)
     {
@@ -24,6 +26,11 @@ public class CartController : ControllerBase
         return Ok(items);
     }
 
+    /// <summary>
+    /// Adds a new item to the cart.
+    /// </summary>
+    /// <param name="cartId"></param>
+    /// <param name="item"></param>
     [HttpPost("{cartId}/items")]
     public IActionResult AddItem(string cartId, [FromBody] CartItem item)
     {
@@ -33,6 +40,11 @@ public class CartController : ControllerBase
         return Ok();
     }
 
+    /// <summary>
+    /// Removes the specified item from the cart.
+    /// </summary>
+    /// <param name="cartId"></param>
+    /// <param name="itemId"></param>
     [HttpDelete("{cartId}/items/{itemId}")]
     public IActionResult RemoveItem(string cartId, int itemId)
     {
