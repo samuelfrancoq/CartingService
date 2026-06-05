@@ -15,5 +15,7 @@ namespace CartingService.BLL.Interfaces
         void AddItem(string cartId, CartItem item);
         // Removes a specific item from the cart
         void RemoveItem(string cartId, int itemId);
+        void UpdateItemInAllCartsAsync(int productId, string newName, decimal newPrice);
+
     }
 }

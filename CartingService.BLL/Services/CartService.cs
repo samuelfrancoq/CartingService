@@ -52,4 +52,11 @@ public class CartService : ICartService
         cart.Items.RemoveAll(i => i.Id == itemId);
         _repository.Update(cart);
     }
+
+    // This method is called by the ProductUpdatedConsumer when a product is updated in the Catalog Service
+    public void UpdateItemInAllCartsAsync(int productId, string newName, decimal newPrice)
+    {
+        // Delegate the update logic to the repository, which will handle the NoSQL database operations
+        _repository.UpdateItemInAllCarts(productId, newName, newPrice);
+    }
 }

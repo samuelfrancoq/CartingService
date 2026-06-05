@@ -11,6 +11,6 @@ namespace CartingService.DAL.Interfaces
     {
         Cart GetById(string id);
         void Update(Cart cart);
-        // Agrega Delete si lo ves necesario para el RemoveItem
+        void UpdateItemInAllCarts(int productId, string newName, decimal newPrice);
     }
 }

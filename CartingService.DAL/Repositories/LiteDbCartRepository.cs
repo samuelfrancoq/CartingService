@@ -27,5 +27,29 @@ namespace CartingService.DAL.Repositories
             var collection = db.GetCollection<Cart>(CollectionName);
             collection.Upsert(cart);
         }
+
+        public void UpdateItemInAllCarts(int productId, string newName, decimal newPrice)
+        {
+            using var db = new LiteDatabase(_dbPath);
+            var collection = db.GetCollection<Cart>(CollectionName);
+
+            var cartsToUpdate = collection
+                .Find(c => c.Items.Select(i => i.Id).Any(id => id == productId))
+                .ToList();
+
+            foreach (var cart in cartsToUpdate)
+            {
+                if (cart.Items == null) continue;
+
+                var item = cart.Items.FirstOrDefault(i => i.Id == productId);
+                if (item != null)
+                {
+                    item.Name = newName;
+                    item.Price = newPrice;
+
+                    collection.Update(cart);
+                }
+            }
+        }
     }
 }

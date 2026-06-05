@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit.RabbitMQ" Version="9.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CartingService.DAL\CartingService.DAL.csproj" />
     <ProjectReference Include="..\CartingService.Domain\CartingService.Domain.csproj" />
   </ItemGroup>
