@@ -1,15 +1,41 @@
 using System.Reflection;
+using System.Text;
 using CartingService.BLL.Interfaces;
 using CartingService.BLL.Services;
 using CartingService.DAL.Interfaces;
 using CartingService.DAL.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.OpenApi.Models;
+using CartingService.WebApi.Middlewares;
 using MassTransit;
 using MassTransit.Scheduling;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// JWT Authentication Configuration
+var jwtSettings = builder.Configuration.GetSection("JWT");
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings["ValidIssuer"],
+        ValidAudience = jwtSettings["ValidAudience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Secret"]))
+    };
+});
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -54,6 +80,31 @@ builder.Services.AddSwaggerGen(c => {
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Please enter the JWT token: Bearer {your_token_here}"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 
 // --- CUSTOM SERVICES REGISTRATION ---
@@ -76,6 +127,9 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v2/swagger.json", "Carting Service API v2");
     });
 }
+app.UseRouting();
+app.UseMiddleware<TokenLoggingMiddleware>(); // Personalized middleware for logging token details
+app.UseAuthentication();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

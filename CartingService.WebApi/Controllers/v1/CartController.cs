@@ -1,5 +1,6 @@
 ﻿using CartingService.BLL.Interfaces;
 using CartingService.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CartingService.WebApi.Controllers.v1;
@@ -7,6 +8,8 @@ namespace CartingService.WebApi.Controllers.v1;
 /// <summary>
 /// Controller for managing cart operations such as retrieving, adding, and removing items in a cart.
 /// </summary>
+/// 
+[Authorize(Roles = "Manager,Store customer")]
 [ApiVersion("1.0")]
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]
