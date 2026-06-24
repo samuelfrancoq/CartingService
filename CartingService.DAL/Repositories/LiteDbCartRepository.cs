@@ -39,7 +39,10 @@ namespace CartingService.DAL.Repositories
 
             foreach (var cart in cartsToUpdate)
             {
-                if (cart.Items == null) continue;
+                if (cart.Items == null)
+                {
+                    continue;
+                }
 
                 var item = cart.Items.FirstOrDefault(i => i.Id == productId);
                 if (item != null)

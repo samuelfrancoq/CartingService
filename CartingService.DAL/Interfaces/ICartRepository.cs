@@ -9,8 +9,8 @@ namespace CartingService.DAL.Interfaces
 {
     public interface ICartRepository
     {
-        Cart GetById(string id);
-        void Update(Cart cart);
-        void UpdateItemInAllCarts(int productId, string newName, decimal newPrice);
+        public Cart GetById(string id);
+        public void Update(Cart cart);
+        public void UpdateItemInAllCarts(int productId, string newName, decimal newPrice);
     }
 }

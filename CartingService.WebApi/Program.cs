@@ -62,18 +62,18 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
-builder.Services.AddApiVersioning(options => {
+builder.Services.AddApiVersioning(options =>{
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.ReportApiVersions = true;
 });
 
-builder.Services.AddVersionedApiExplorer(options => {
+builder.Services.AddVersionedApiExplorer(options =>{
     options.GroupNameFormat = "'v'VVV";
     options.SubstituteApiVersionInUrl = true;
 });
 
-builder.Services.AddSwaggerGen(c => {
+builder.Services.AddSwaggerGen(c =>{
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Carting Service API", Version = "v1" });
     c.SwaggerDoc("v2", new OpenApiInfo { Title = "Carting Service API", Version = "v2" });
     // NFR: Self-Documented API (XML Docs)
@@ -136,9 +136,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-// Asegúrate de tener instalado el paquete NuGet:
-// Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer
-
-// Si no lo tienes, ejecuta en la terminal del proyecto:
-// dotnet add package Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer

@@ -39,7 +39,10 @@ public class CartController(ICartService cartService) : ControllerBase
     public IActionResult AddItem(string cartId, [FromBody] CartItem item)
     {
         // Validates and adds a new item to the cart
-        if (item == null) return BadRequest("Item data is required.");
+        if (item == null)
+        {
+            return BadRequest("Item data is required.");
+        }
         _cartService.AddItem(cartId, item);
         return Ok();
     }
