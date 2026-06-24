@@ -62,7 +62,7 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
-builder.Services.AddApiVersioning(options => 
+builder.Services.AddApiVersioning(options =>
 {
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.AssumeDefaultVersionWhenUnspecified = true;
